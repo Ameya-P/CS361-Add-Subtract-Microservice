@@ -1,27 +1,10 @@
 """
 Requirements:
--- API user specifies either addition or subtraction
--- provides num1 and num2
--- perform the operation num1 + num2 or num1 - num2
 -- handle bad inputs too, return error code
-
-general possible inputs it should handle
--- always a url
--- always to /addsub endpoint
 -- always need two numbers, otherwise error
--- specify add, sub, or no action (last one defaults to add)
-
-edge cases
 -- lots of them... just defualt to error code
--- do want to handle decimals too
-
-other thoughts
-
-
 """
 
-# todo: what does the input string look like
-# todo: get it up on Render, auto update with github actions or something
 from fastapi import FastAPI
 
 # Initialize the application
@@ -53,9 +36,31 @@ def process_data(user_input: str):
 
 @app.get("/subtract")
 def subtract(num1: float, num2: float):
+    """
+    :param num1: Number to subtract from
+    :param num2: Number to subtract by
+    :return: dict describing inputs and output
+    example call: https://cs361-add-subtract-microservice.onrender.com/subtract?num1=4&num2=1
+    """
     difference = num1 - num2
     return {
         "num1": num1,
         "num2": num2,
         "difference": difference
+    }
+
+
+@app.get("/add")
+def subtract(num1: float, num2: float):
+    """
+    :param num1: First number to add
+    :param num2: Second number to add
+    :return: dict describing inputs and output
+    example call: https://cs361-add-subtract-microservice.onrender.com/add?num1=4&num2=1
+    """
+    sum = num1 + num2
+    return {
+        "num1": num1,
+        "num2": num2,
+        "sum": sum
     }
