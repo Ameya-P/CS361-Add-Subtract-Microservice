@@ -27,9 +27,11 @@ from fastapi import FastAPI
 # Initialize the application
 app = FastAPI()
 
-@app.get("/")
+
+@app.get("")
 def health_check():
     return {"status": "Microservice is online and listening."}
+
 
 # 1. The Client sends an HTTP request to this URL endpoint
 # The {user_input} part extracts info from the URL as a parameter
@@ -46,4 +48,14 @@ def process_data(user_input: str):
         "processed": processed_string,
         "length": character_count,
         "status": "success"
+    }
+
+
+@app.get("/subtract")
+def subtract(num1: float, num2: float):
+    difference = num1 - num2
+    return {
+        "num1": num1,
+        "num2": num2,
+        "difference": difference
     }
