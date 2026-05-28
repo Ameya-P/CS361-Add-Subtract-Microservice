@@ -27,6 +27,9 @@ from fastapi import FastAPI
 # Initialize the application
 app = FastAPI()
 
+@app.get("/")
+def health_check():
+    return {"status": "Microservice is online and listening."}
 
 # 1. The Client sends an HTTP request to this URL endpoint
 # The {user_input} part extracts info from the URL as a parameter
